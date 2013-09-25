@@ -1,0 +1,34 @@
+{
+  "name": "ARTIFACTID",
+  "version": "ARTIFACTVERSION",
+  "description": "Mock object for PG library",
+  "private": true,
+  "keywords": [
+    "aurin",
+    "commons",
+    "cache"
+  ],
+  "author": {
+    "name": "Luca Morandini",
+    "email": "luca.morandini@unimelb.edu.au"
+  },
+  "contributors": [],
+  "main": "./pgMock.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "chai": "CHAIVERSION",
+    "mocha": "MOCHAVERSION"
+  },
+  "scripts": {},
+  "engines": {
+    "node": "NODEVERSION"
+  },
+  "_id": "GROUPID.ARTIFACTID@ARTIFACTVERSION",
+  "optionalDependencies": {},
+  "_engineSupported": true,
+  "_npmVersion": "NPMVERSION",
+  "_nodeVersion": "NODEVERSION",
+  "_defaultsLoaded": false,
+  "_from": ""
+}
