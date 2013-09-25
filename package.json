@@ -22,13 +22,13 @@
   },
   "scripts": {},
   "engines": {
-    "node": "0.6.x"
+    "node": "0.10.x"
   },
   "_id": "au.org.aurin.pg-mock@0.1.0-SNAPSHOT",
   "optionalDependencies": {},
   "_engineSupported": true,
   "_npmVersion": "1.1.4",
-  "_nodeVersion": "0.6.x",
+  "_nodeVersion": "0.10.x",
   "_defaultsLoaded": false,
   "_from": ""
 }
