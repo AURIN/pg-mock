@@ -6,7 +6,7 @@ exports.outputs = {};
 exports.outputs["SELECT * FROM User"] = {
 	rs : {
 		rowCount : 3,
-		row : [ {
+		rows : [ {
 			id : 1,
 			name : "Alice"
 		}, {
@@ -26,4 +26,22 @@ exports.outputs["SELECT * FROM Xxx"] = {
 		name : "foo",
 		message : "bar"
 	}
+};
+
+exports.outputs["CREATE TABLE a (id INTEGER)"] = {
+	rs : {
+		rowCount : null,
+		command : "CREATE",
+		rows : []
+	},
+	err : null
+};
+
+exports.outputs["INSERT INTO a (id) VALUES (1)"] = {
+	rs : {
+		rowCount : 1,
+		command : "INSERT",
+		rows : []
+	},
+	err : null
 };
