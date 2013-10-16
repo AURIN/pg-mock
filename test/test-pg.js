@@ -20,7 +20,7 @@ describe("test-pg.js", function() {
 			expect(err).to.be.null;
 			client.query("SELECT * FROM Xxx",
 					function(err, result) {
-			      expect(err).not.null;
+						expect(err).not.null;
 						expect(result).to.be.null;
 						done();
 					});
@@ -32,7 +32,7 @@ describe("test-pg.js", function() {
 			expect(err).to.be.null;
 			client.query("SELECT * FROM User",
 					function(err, result) {
-				   expect(err).to.be.null;
+						expect(err).to.be.null;
 						expect(result).to.eql(pg.testData.outputs["SELECT * FROM User"].rs);
 						done();
 					});
@@ -45,6 +45,13 @@ describe("test-pg.js", function() {
 		pg.connect({}, function(err, client, releaseClient) {
 			expect(client).to.be.null;
 			pg.nullClient = false;
+			done();
+		});
+	});
+
+	it("binds the end event", function(done) {
+		pg.connect({}, function(err, client, releaseClient) {
+			client.on('drain', client.end.bind(client));
 			done();
 		});
 	});

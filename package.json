@@ -27,7 +27,7 @@
   "_id": "au.org.aurin.pg-mock@0.1.0-SNAPSHOT",
   "optionalDependencies": {},
   "_engineSupported": true,
-  "_npmVersion": "1.1.4",
+  "_npmVersion": "1.2.x",
   "_nodeVersion": "0.10.x",
   "_defaultsLoaded": false,
   "_from": ""
