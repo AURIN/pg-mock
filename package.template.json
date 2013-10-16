@@ -13,7 +13,7 @@
     "email": "luca.morandini@unimelb.edu.au"
   },
   "contributors": [],
-  "main": "./pgMock.js",
+  "main": "lib/pgMock.js",
   "dependencies": {
   },
   "devDependencies": {
