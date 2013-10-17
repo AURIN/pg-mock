@@ -34,13 +34,8 @@ describe("test-pg.js", function() {
 			expect(err).to.be.null;
 			client.query(sql,
 					function(err, result) {
-<<<<<<< HEAD
-				   expect(err).to.be.null;
+				   		expect(err).to.be.null;
 						expect(result).to.eql(pg.testData.outputs[sql].rs);
-=======
-						expect(err).to.be.null;
-						expect(result).to.eql(pg.testData.outputs["SELECT * FROM User"].rs);
->>>>>>> d7d50dd5f31b1c5bd6a0838058e0b7b31a47b4bc
 						done();
 					});
 		});
