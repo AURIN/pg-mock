@@ -1,6 +1,6 @@
 {
   "name": "pg-mock",
-  "version": "0.1.0-SNAPSHOT",
+  "version": "0.1.1-SNAPSHOT",
   "description": "Mock object for PG library",
   "private": true,
   "keywords": [
