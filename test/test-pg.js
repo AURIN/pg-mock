@@ -10,7 +10,7 @@ describe("test-pg.js", function() {
 	var testData;
 
 	before(function(done) {
-		pg = require("../lib/pgMock.js");
+		pg = require("../pgMock.js");
 		pg.testData = require("./testdata.js");
 		done();
 	});
