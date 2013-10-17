@@ -8,7 +8,7 @@
 
 "use strict";
 
-var Client = require(__dirname + '/client.js');
+var Client = require(__dirname + '/lib/client.js');
 
 exports.nullClient = false;
 exports.testData= null;
