@@ -13,7 +13,7 @@
     "email": "luca.morandini@unimelb.edu.au"
   },
   "contributors": [],
-  "main": "./pgMock.js",
+  "main": "lib/pgMock.js",
   "dependencies": {
   },
   "devDependencies": {
@@ -24,7 +24,7 @@
   "engines": {
     "node": "0.10.x"
   },
-  "_id": "au.org.aurin.pg-mock@0.1.0-SNAPSHOT",
+  "_id": "au.org.aurin.pg-mock@0.1.1",
   "optionalDependencies": {},
   "_engineSupported": true,
   "_npmVersion": "1.2.x",
