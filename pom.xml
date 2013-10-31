@@ -11,8 +11,8 @@
     <version>${project.version}</version>
     <nodeVersion>0.10.x</nodeVersion>
     <npmVersion>1.2.x</npmVersion>
-    <chaiVersion>1.3.0</chaiVersion>
-    <mochaVersion>1.6.0</mochaVersion>
+    <chaiVersion>>= 1.3.0</chaiVersion>
+    <mochaVersion>>= 1.6.0</mochaVersion>
   </properties>
 
   <parent>
