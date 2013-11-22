@@ -1,6 +1,6 @@
 {
   "name": "pg-mock",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Mock object for PG library",
   "private": true,
   "keywords": [
@@ -13,7 +13,7 @@
     "email": "luca.morandini@unimelb.edu.au"
   },
   "contributors": [],
-  "main": "pgMock.js",
+  "main": "lib/pgMock.js",
   "dependencies": {
   },
   "devDependencies": {
@@ -24,7 +24,7 @@
   "engines": {
     "node": "0.10.x"
   },
-  "_id": "au.org.aurin.pg-mock@0.1.2",
+  "_id": "au.org.aurin.pg-mock@0.2.0",
   "optionalDependencies": {},
   "_engineSupported": true,
   "_npmVersion": "1.2.x",

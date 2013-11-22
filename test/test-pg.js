@@ -7,11 +7,10 @@ describe("test-pg.js", function() {
 	var expect = chai.expect;
 	var should = chai.should();
 	var pg;
-	var testData;
 
 	before(function(done) {
-		pg = require("../pgMock.js");
-		pg.testData = require("./testdata.js");
+		pg = require("../pg-mock.js");
+		pg.setTestData(require("./testdata.js"));
 		done();
 	});
 
