@@ -47,9 +47,9 @@ describe("test-pg.js", function() {
 			expect(err).to.be.null;
 			client.query(sql,
 					function(err, result) {
-				   expect(err).to.be.null;
+						expect(err).to.be.null;
 						expect(result.rowCount).to.be.null;
-			      expect(result.command).to.equal("CREATE");
+						expect(result.command).to.equal("CREATE");
 						done();
 					});
 		});
@@ -61,9 +61,9 @@ describe("test-pg.js", function() {
 			expect(err).to.be.null;
 			client.query(sql,
 					function(err, result) {
-				   expect(err).to.be.null;
+						expect(err).to.be.null;
 						expect(result.rowCount).to.equal(1);
-			      expect(result.command).to.equal("INSERT");
+						expect(result.command).to.equal("INSERT");
 						done();
 					});
 		});
@@ -82,6 +82,17 @@ describe("test-pg.js", function() {
 	it("binds the end event", function(done) {
 		pg.connect({}, function(err, client, releaseClient) {
 			client.on('drain', client.end.bind(client));
+			done();
+		});
+	});
+
+	it("checks for missing test data", function(done) {
+		var sql = "SELECT * FROM non_existent_table";
+		pg.connect({}, function(err, client, releaseClient) {
+			expect(err).to.be.null;
+			expect(function() { client.query(sql, function(err, result) {}) })
+				.to.throw({ "pg-mock-error": "missing-test-data",
+                                "query": sql });
 			done();
 		});
 	});
