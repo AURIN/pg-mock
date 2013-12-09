@@ -3,7 +3,8 @@
  * 
  * Mock object for the PostgreSQL driver (pg)
  * 
- * To inject test data into it, just do this: require("pgMock.js").testData= require("foo.js") 
+ * To inject test data into it, just do this: require("pgMock.js").testData=
+ * require("foo.js")
  */
 
 "use strict";
@@ -11,7 +12,7 @@
 var Client = require(__dirname + '/lib/client.js');
 
 exports.nullClient = false;
-exports.testData= null;
+exports.testData = null;
 
 exports.connect = function(config, callback) {
 	// Returns a null client when nullClient is defined
@@ -20,7 +21,7 @@ exports.connect = function(config, callback) {
 		});
 	} else {
 		var config = {
-			testData: exports.testData
+			testData : exports.testData
 		};
 		callback(null, new Client(config), function() {
 		});
@@ -37,3 +38,7 @@ exports.defaults = {
 	poolSize : 0
 };
 
+// NOTE: This is just for the mock object
+exports.setTestData = function(data) {
+	exports.testData = data;
+}
