@@ -12,7 +12,7 @@
 var Client = require(__dirname + '/lib/client.js');
 
 exports.nullClient = false;
-exports.testData = null;
+var testData = null;
 
 exports.connect = function(config, callback) {
 	// Returns a null client when nullClient is defined
@@ -41,4 +41,4 @@ exports.defaults = {
 // NOTE: This is just for the mock object
 exports.setTestData = function(data) {
 	exports.testData = data;
-}
+};
