@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>au.org.aurin</groupId>
   <artifactId>pg-mock</artifactId>
-  <version>0.2.2</version>
+  <version>0.2.4</version>
 
   <properties>
     <version>${project.version}</version>
