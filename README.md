@@ -23,7 +23,7 @@ To run unit tests:
 
 Using pg-mock
 -------------
-
+```
   // Sample test data (the SQL statement it's the key, the rwoset is the mock result of the query, 
   // err is the error, if any, returned
   exports.outputs = {};
@@ -51,3 +51,4 @@ Using pg-mock
             expect(result).to.eql(pg.testData.outputs["SELECT * FROM User"].rs);
           });
   });  
+```
