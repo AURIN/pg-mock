@@ -1,5 +1,5 @@
 /**
- * Mock object for the PostgreSQL driver (pg)
+ * Mock object for the PostgreSQL driver (pg) using Promises (andnot callbacks)
  *
  * To inject test data into it, just do this: add a 'testData' property to the
  * constructor params argument
@@ -14,9 +14,10 @@ class Client {
     this.logger = params.logger;
     this.host = params.host;
     this.testData = params.testData;
+    this.closeError= params.closeError;
   };
 
-  connect (config, callback) {
+  connect (config) {
     return new Promise ((resolve, reject) => {
       setTimeout (() => {
         if (this.host === this.testData['INVALIDHOST'].host) {
@@ -41,6 +42,16 @@ class Client {
   }
 
   end () {
+    return new Promise ((resolve, reject) => {
+      setTimeout (() => {
+        if (this.closeError) {
+          reject (new Error ('Error in closing the client'));
+        } else {
+          resolve ();
+        }
+      }, 300);
+    });
+
   }
 }
 

@@ -7,6 +7,7 @@ const {Client} = require ('../index.js');
 const SQLVALID = "SELECT COUNT(*) FROM information_schema.tables WHERE table_type = 'BASE TABLE'";
 const SQLINVALIDHOST = "INVALIDHOST";
 const SQLMISSINGTABLE = "SELECT COUNT(*) FROM information_schema.xxx WHERE table_type = 'BASE TABLE'";
+const SQLCLOSEERROR = "SQLCLOSEERROR";
 
 const setParams = () => {
   const p = {
@@ -15,6 +16,7 @@ const setParams = () => {
     password: 'password',
     database: 'database',
     port: 5432,
+    closeError: false,
     testData: {}
   };
 
@@ -27,6 +29,10 @@ const setParams = () => {
   p.testData[SQLMISSINGTABLE] = {
     rs: {rowCount: 1, rows: []},
     err: {routine: 'parserOpenTable', code: '42P01', file: 'parse_relation.c'}
+  };
+  p.testData[SQLCLOSEERROR] = {
+    rs: {},
+    err: null
   };
   return p;
 };
@@ -69,6 +75,18 @@ describe ('pg-mock', function () {
         assert.equal (err.file, setParams ().testData[SQLMISSINGTABLE].err.file);
         done ();
       });
+  });
+
+  it ('error in closing the client', (done) => {
+    const client = (new Client (_.extend (setParams (), {closeError: true})));
+    client
+      .end ().then ((result) => {
+      assert.isTrue (false, `Closing should fail`);
+    }).catch ((err) => {
+      assert.isFalse (err == null);
+      assert.equal (err.message, 'Error in closing the client');
+      done ();
+    });
   });
 
   it ('valid query', (done) => {
