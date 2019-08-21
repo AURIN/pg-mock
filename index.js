@@ -14,7 +14,7 @@ class Client {
     this.logger = params.logger;
     this.host = params.host;
     this.testData = params.testData;
-    this.closeError= params.closeError;
+    this.closeError = params.closeError;
   };
 
   connect (config) {
@@ -25,36 +25,59 @@ class Client {
         } else {
           resolve ({});
         }
-      }, 300);
+      }, 30);
     });
   }
 
   query (sql) {
-    return new Promise ((resolve, reject) => {
-      setTimeout (() => {
-        if (this.testData[sql].err) {
-          reject (this.testData[sql].err);
-        } else {
-          resolve (this.testData[sql].rs);
-        }
-      }, 300);
-    });
+    if (sql instanceof Cursor) {
+      return new Promise ((resolve, reject) => {
+        setTimeout (() => {
+          sql.testData = this.testData;
+          resolve (sql);
+        }, 30);
+      });
+    } else {
+      return new Promise ((resolve, reject) => {
+        setTimeout (() => {
+          if (this.testData[sql].err) {
+            reject (this.testData[sql].err);
+          } else {
+            resolve (this.testData[sql].rs);
+          }
+        }, 30);
+      });
+    }
   }
 
-  end () {
-    return new Promise ((resolve, reject) => {
-      setTimeout (() => {
-        if (this.closeError) {
-          reject (new Error ('Error in closing the client'));
-        } else {
-          resolve ();
-        }
-      }, 300);
-    });
+  end (callback) {
+    setTimeout (() => {
+      if (this.closeError) {
+        callback (new Error ('Error in closing the client'));
+      } else {
+        callback ();
+      }
+    }, 30);
+  }
+}
 
+class Cursor {
+
+  constructor (sql, params) {
+    this.sql = sql;
+    this.testData = null;
+    this.nrow = 0;
+  };
+
+  read (size, callback) {
+    setTimeout (() => {
+      this.nrow += size;
+      callback (this.testData[this.sql].err, this.testData[this.sql].rs && this.testData[this.sql].rs.rows.slice (this.nrow - size, this.nrow))
+    }, 5);
   }
 }
 
 module.exports = {
-  Client: Client
+  Client: Client,
+  Cursor: Cursor
 };

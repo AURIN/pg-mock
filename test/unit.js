@@ -3,7 +3,7 @@
 const chai = require ('chai');
 const {assert} = require ('chai');
 const _ = require ('underscore');
-const {Client} = require ('../index.js');
+const {Client, Cursor} = require ('../index.js');
 const SQLVALID = "SELECT COUNT(*) FROM information_schema.tables WHERE table_type = 'BASE TABLE'";
 const SQLINVALIDHOST = "INVALIDHOST";
 const SQLMISSINGTABLE = "SELECT COUNT(*) FROM information_schema.xxx WHERE table_type = 'BASE TABLE'";
@@ -20,7 +20,7 @@ const setParams = () => {
     testData: {}
   };
 
-  p.testData[SQLVALID] = {rs: {rowCount: 1, rows: []}, err: null};
+  p.testData[SQLVALID] = {rs: {rowCount: 5, rows: [{a: 1}, {a: 2}, {a: 3}, {a: 4}, {a: 5}]}, err: null};
   p.testData[SQLINVALIDHOST] = {
     host: 'nohost.com',
     rs: null,
@@ -31,7 +31,7 @@ const setParams = () => {
     err: {routine: 'parserOpenTable', code: '42P01', file: 'parse_relation.c'}
   };
   p.testData[SQLCLOSEERROR] = {
-    rs: {},
+    rs: {rowCount: 1, rows: [{a: 1}]},
     err: null
   };
   return p;
@@ -79,11 +79,7 @@ describe ('pg-mock', function () {
 
   it ('error in closing the client', (done) => {
     const client = (new Client (_.extend (setParams (), {closeError: true})));
-    client
-      .end ().then ((result) => {
-      assert.isTrue (false, `Closing should fail`);
-    }).catch ((err) => {
-      assert.isFalse (err == null);
+    client.end ((err) => {
       assert.equal (err.message, 'Error in closing the client');
       done ();
     });
@@ -110,4 +106,41 @@ describe ('pg-mock', function () {
         done ();
       });
   });
+
+  it ('valid query with cursor', (done) => {
+    const client = (new Client (setParams ()));
+    client
+      .connect ().then (() => {
+      assert.isTrue (true, `Connection succeeded`);
+    }).catch ((err) => {
+      assert.isTrue (false, `Un-expected exception raised`);
+      done ();
+    });
+
+    let nrows = 0;
+    const f = async function () {
+      const cursor = await client.query (new Cursor (SQLVALID, []));
+
+      const processCursor = (err, rows) => {
+
+        _.each (rows, (row) => {
+          nrows++;
+        });
+
+        if (rows.length > 0) {
+          cursor.read (2, processCursor);
+        } else {
+          client.end ((err) => {
+            assert.equal (nrows, setParams ().testData[SQLVALID].rs.rowCount);
+            return done ();
+          });
+        }
+      };
+
+      cursor.read (100, processCursor);
+    };
+
+    f ();
+  });
+
 });
