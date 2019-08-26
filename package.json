@@ -1,17 +1,14 @@
 {
-  "name": "pg-mock",
-  "version": "1.0.0-SNAPSHOT",
+  "name": "@aurin/pg-mock",
+  "version": "1.0.0",
   "description": "Mock object for PG library",
-  "private": true,
+  "private": false,
   "keywords": [
     "aurin",
     "commons",
     "cache"
   ],
-  "author": {
-    "name": "Luca Morandini",
-    "email": "luca.morandini@unimelb.edu.au"
-  },
+  "author": "Luca Morandini <luca.morandini@unimelb.edu.au>",
   "contributors": [],
   "main": "pg-mock.js",
   "dependencies": {
@@ -23,17 +20,31 @@
     "mocha": ">= 1.6.0"
   },
   "scripts": {
-    "utest": "export NODE_ENV=test; mocha --no-colors --timeout 20000 test/unit"
+    "utest": "export NODE_ENV=test; mocha --no-colors --timeout 20000 test/unit",
+    "login": "npm login --registry=https://repo.aurin.cloud.edu.au/repository/npm-aurin/ --scope=@aurin",
+    "privatepublish": "cp .gitignore .npmignore; npm publish"
   },
   "engines": {
     "node": "10.16.x",
     "npm": "6.9.x"
   },
-  "_id": "au.org.aurin.pg-mock@0.2.5",
   "optionalDependencies": {},
   "_engineSupported": true,
   "_npmVersion": "6.9.x",
   "_nodeVersion": "10.16.x",
   "_defaultsLoaded": false,
-  "_from": ""
+  "_from": "",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AURIN/pg-mock.git"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/AURIN/pg-mock/issues"
+  },
+  "homepage": "https://github.com/AURIN/pg-mock#readme"
 }

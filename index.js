@@ -13,6 +13,8 @@ class Client {
     this.open = true;
     this.logger = params.logger;
     this.host = params.host;
+    this.user = params.user;
+    this.password = params.password;
     this.testData = params.testData;
     this.closeError = params.closeError;
   };
